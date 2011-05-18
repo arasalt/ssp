@@ -70,6 +70,15 @@ ADMIN_MEDIA_PREFIX = '/media/admin'
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '@j*@p2_q@2mk$a#fs(@t4#z*l9k*0wd!4@p=(zw^v39^$0bnp6'
 
+
+    #EMAIL_HOST = 'smtp.gmail.com'
+    #EMAIL_HOST_USER = 'atboard.kz@gmail.com'
+    #EMAIL_HOST_PASSWORD = ''
+    #EMAIL_USE_TLS = True
+    #EMAIL_PORT = 587
+    #EMAIL_SUBJECT_PREFIX = '[atboard.kz] '
+    #SERVER_EMAIL = 'no-reply@atboard.kz'
+    #DEFAULT_FROM_EMAIL = 'no-reply@atboard.kz'
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',

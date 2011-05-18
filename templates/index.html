@@ -74,7 +74,7 @@
 	<div id="header">
 		<a href="{%url main_page%}"><img src="/media/static/images/logo-2.jpg" style="float:left;"alt="SDUSummer logo" width="148" height="24" /></a>
 		<span class="slogan">Practice Program</span>
-{%if not user.is_authenticated%}
+
 <script type="text/javascript">
 $(document).ready(function() {
 $("#slideshow").css("overflow", "hidden");
@@ -108,25 +108,13 @@ $("#slideshow").css("overflow", "hidden");
 			<li><img src="/media/static/images/1.png" alt="SDU Summer Program" /></li>
 		</ul>
 </div>
-{%else%}
-<ul id="menu">
-			<li><a href="{%url home_profile %}" accesskey="1" title="">Home </a></li>
-			<li><a href="{%url client_profile user.id%}" accesskey="2" title="">My Profile</a></li>
-			<li><a href="{%url members%}" accesskey="3" title="">Members</a></li>
-			<li><a href="{%url dis_list%}" accesskey="4" title="">Discussions</a></li>
-			<li><a href="{%url file_list%}" accesskey="5" title="">Files</a></li>
-			<li><a href="{%url events_list%}" accesskey="6" title="">Events</a></li>
-			<li><a href="{%url members%}" accesskey="7">Gallery</a></li>
-			<li class="last"><a href="{%url logout%}" accesskey="8" title="">Logout</a></li>
-		</ul>
-{%endif%}
 	</div>
 {%endblock%}
 
 <div id="content1">
 <div id="inner_content">
 {%block right%}	
-{%if not user.is_authenticated %}	
+
 {%block rightinner%}
 <div id="home_content">
 <h2>Welcome to SDU Summer Practice</h2>
@@ -198,7 +186,7 @@ $("#slideshow").css("overflow", "hidden");
 			</div>
 		</div>
 
-{%endif%}
+
 {%endblock%}
 {%block content%}
 {%endblock%}

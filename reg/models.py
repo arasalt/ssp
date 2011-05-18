@@ -33,6 +33,7 @@ class Client(models.Model):
 	activation_key=models.CharField(('activation_key'),max_length=40)
 	activated=models.BooleanField(default=False)
 	create_date = models.DateField(auto_now_add = True)
+        organizator=models.BooleanField(default=False)
         modified_date = models.DateField(auto_now = True)
 	
 	objects=ClientManager()

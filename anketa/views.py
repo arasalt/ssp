@@ -4,6 +4,9 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+
 
 def anketa(request):
     if request.method=="POST":
@@ -22,6 +25,25 @@ def anketa(request):
 def message(request):
     rc=RequestContext(request)
     return render_to_response("anketa/message.html",rc)
+
+@login_required
+def anketa_list(request):
+    anketas=Anketa.objects.all()
+    rc =RequestContext(request,{'anketas':anketas})
+    return render_to_response("anketa/anketa_list.html",rc)
+
+@login_required
+def anketa_detail(request,anketa_id):
+    anketa=Anketa.objects.get(id=anketa_id)
+    af=WithoutRezume(instance=anketa)
+    rc=RequestContext(request,{'af':af,'anketa':anketa})
+    return render_to_response("anketa/anketa_detail.html",rc)
+
+@login_required
+def invite(request,anketa_id):
+    anketa=Anketa.objects.get(id=anketa_id)
+    send_mail('Invite','Pozdravliaem','admin@gmail.com',['anketa@mail.mu'],fail_silently=False)
+    return render_to_response("anketa/message.html")
 
 
 def cv(request):

@@ -7,4 +7,8 @@ class AnketaForm(forms.ModelForm):
         model=Anketa
         exclude=('date')
         
+class WithoutRezume(forms.ModelForm):
+    class Meta():
+        model=Anketa
+        exclude=('date','rezume')        
         

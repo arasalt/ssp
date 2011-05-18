@@ -1,0 +1,16 @@
+{%extends "client_page.html"%}
+{%block content%}
+<div id= "content2">
+<h1><span>Anketa number {{anketa.id}} :)</span></h1>
+<table>
+	<tr>
+		<td>{{af.as_table}}</td>
+	<td>Rezume:</td><td><a href="{{ anketa.rezume.url}}">{{anketa.rezume.name}}</a>
+	</td>
+	<td><a href="{%url invite anketa.id%}">Invite</a></td>
+	</tr>
+	<tr>
+	</tr>
+</table>
+</div>
+{%endblock%}

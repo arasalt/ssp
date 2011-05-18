@@ -1,4 +1,4 @@
-{%extends "index.html"%}
+{%extends "client_page.html"%}
 {%block content%}
 Choose your avatar
 <form method="POST" action="{%url avatar%}" accept-charset="utf-8" enctype="multipart/form-data">{%csrf_token%}
