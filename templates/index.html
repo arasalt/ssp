@@ -57,7 +57,7 @@
 <script src="/media/static/js/jquery-1.5.2.min.js" type="text/javascript"></script>
 <script src="/media/static/js/ui/jquery.ui.core.js" type="text/javascript"></script>
 <script src="/media/static/js/ui/jquery.ui.datepicker.js" type="text/javascript"></script>
-
+<script src="/media/static/js/jquery.cycle.all.min.js" type="text/javascript"></script>
 </head>
 <body>
 {% block top%}
@@ -75,20 +75,39 @@
 		<a href="{%url main_page%}"><img src="/media/static/images/logo-2.jpg" style="float:left;"alt="SDUSummer logo" width="148" height="24" /></a>
 		<span class="slogan">Practice Program</span>
 {%if not user.is_authenticated%}
-<script>
-$(function() {
-	var i=0;
-	var img_name = new Array('/media/static/images/4.png','/media/static/images/3.png','/media/static/images/5.png','/media/static/images/1.png');
-	setInterval( function(){
-	var img=new Image();
-	$(img).attr('src',img_name[i]);	
-	$("#slideshow2").html(img);
-	i++;
-	i=i%4;						
-	}, 8000);				
-	});
+<script type="text/javascript">
+$(document).ready(function() {
+$("#slideshow").css("overflow", "hidden");
+
+ $("ul#slides").cycle({
+ fx: 'fade',
+ pause: 1,
+ prev: '#prev',
+ next: '#next'
+ });
+
+ $("#slideshow").hover(function() {
+ $("ul#nav").fadeIn();
+ },
+ function() {
+ $("ul#nav").fadeOut();
+ });
+
+});
 </script>
-<div id="slideshow2" ><img src="/media/static/images/bigpicture.jpg" alt=""/></div>
+<div id="slideshow">
+		<ul id="nav">
+			<li id="prev"><a href="#">Previous</a></li>
+			<li id="next"><a href="#">Next</a></li>
+		</ul>
+
+		<ul id="slides">
+			<li><img src="/media/static/images/4.png" alt="SDU Summer Program" /></li>
+			<li><img src="/media/static/images/3.png" alt="SDU Summer Program" /></li>
+			<li><img src="/media/static/images/5.png" alt="SDU Summer Program" /></li>
+			<li><img src="/media/static/images/1.png" alt="SDU Summer Program" /></li>
+		</ul>
+</div>
 {%else%}
 <ul id="menu">
 			<li><a href="{%url home_profile %}" accesskey="1" title="">Home </a></li>
@@ -163,8 +182,7 @@ $(function() {
 					<li><a href="http://www.bee.kz/about_careers.html"><img id="logoimg" src="/media/static/images/logos/beesoft.png" alt="beesoftware"/></a></li>
 					<li><a href="http://www.kkb.kz/"><img id="logoimg" src="/media/static/images/logos/kazkom.jpg" alt=""/></li>
 					<li><a href="http://bpsolutions.kz/"><img id="logoimg" src="/media/static/images/logos/bpsolutions.png" alt=""/></a></li>
-					<li><a href="http://ott.kz/"><img id="logoimg" src="/media/static/images/logos/ott.jpg" alt=""/></a></li>
-					<li><a href="http://diamondIT.kz/"><img id="logoimg" src="/media/static/images/logos/diamondIT.jpg" alt=""/></a></li>
+					<li><a href="http://ott.kz/"><img id="logoimg" src="/media/static/images/logos/ott.png" alt=""/></a></li>
 				</ul>
 			</div>
 			<div id ="rightdiv">
