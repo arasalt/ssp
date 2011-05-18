@@ -1,0 +1,22 @@
+{%extends "index.html"%}
+
+{%block content%}
+	<div id= "content2">
+	<h1><span>Disscussions</span></h1>
+	{%for d in author.discussion_set.all%}
+	<div id="dis_mini">
+	<h2><a href="{%url dis_detail d.id%}">{{d}}</a></h2>		
+	<span>
+	{%if client.image%}
+	<td><img src="{{client.image.url}}"></td>
+	{%else%}
+	<td><img src="/media/avatars/generic50.jpg"></td>
+	{%endif%}
+	</span>
+	</div>
+	{%endfor%}		
+	
+	</div>
+{%endblock%}
+
+

@@ -1,0 +1,15 @@
+{%extends "index.html"%}
+{%block content%}
+
+<h2>Create Event</h2>
+<form action="" method="post">{%csrf_token%}
+{{eform.as_p}}		
+
+<script>
+$(function() {
+$( "#id_date" ).datepicker();
+});
+</script>
+		<input type='submit' value='create' />
+	</form>
+{%endblock%}

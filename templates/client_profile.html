@@ -1,0 +1,89 @@
+{%extends "index.html"%}
+qwertyy
+{% block content%}
+<div id="content2">
+<h1><span>My Profile {{client.username}}</span></h1>
+		
+
+<table>
+<tr>
+{%if client.image%}
+<td><img src="{{client.image.url}}"></td>
+{%else%}
+<td><img src="/media/avatars/generic50.jpg"></td>
+{%endif%}
+</td>
+{%if client.name%}
+<td>Name:</td>	<td>{{client.name}}</td>
+{%else%}
+<td>Name:</td>	<td>{{client.name}}</td>
+{%endif%}
+</tr>
+<tr>
+{%if client.surname%}
+<td></td><td>Surname:</td><td>{{client.surname}}</td>
+{%else%}
+<td>Surname:</td><td>None</td>
+{%endif%}
+</tr>
+<tr>
+</tr>
+
+<tr>
+{%if client.location%}
+<td></td><td>Location:</td><td>{{client.location}}</td>
+{%else%}
+<td></td><td>Location:</td>	<td>You haven't fill yet</td>
+{%endif%}
+
+</tr>
+<tr>
+</tr>
+
+<tr>
+{%if client.about%}
+<td></td><td>About:</td><td>{{client.about}}</td>
+{%else%}
+<td></td><td>About:</td>	<td>You haven't fill yet</td>
+{%endif%}
+
+
+</tr>
+<tr>
+</tr>
+
+
+<tr>
+{%if client.files%}
+<td></td><td>Cv:</td><td>{{client.files}}</td>
+{%else%}
+<td></td><td>Cv:</td><td>You didn't dowload</td>
+{%endif%}
+</tr>
+<tr>
+</tr>
+
+
+
+<tr>
+<td></td><td>Create date:</td><td>{{client.create_date}}</td>
+</tr>
+<tr>
+</tr>
+
+<tr>
+<td></td><td>Modified date:</td><td>{{client.modified_date}}</td>
+</tr>
+
+<tr>
+</tr>
+
+
+<td></td><td></td><td><a href="{{client.link_to_edit}}">Edit</a></td>{%csrf_token%}
+</tr>
+</table>
+					</div>
+	</div>
+
+
+{% endblock %}

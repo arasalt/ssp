@@ -1,0 +1,17 @@
+{%extends "index.html"%}
+{%block content%}
+<ul>
+
+{% for uf in list %}
+    <li>{{ uf.user }} - <a href="{{ uf.file.url }}">{{uf.file.name}}</a></li>
+{% endfor %}
+</ul>
+
+
+
+<ul>
+<li>
+<h2><a href="{%url upload_file%}">Upload file</a></h2>
+</li>
+</ul>
+{%endblock%}

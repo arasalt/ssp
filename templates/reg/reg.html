@@ -1,0 +1,27 @@
+{%extends "index.html"%}
+
+{%block content%}
+<div class="reg" id="register">
+<ul>
+
+<h2>Registration Form</h2>
+<form action="" autocomplete="on" method="post">
+
+{% csrf_token %}	
+<li>
+<table>
+{{ form.as_table }}
+</table>
+</li>
+<li>
+<input type="submit" value="Register" />
+</li>
+</form>
+</ul>
+</div>
+</div>
+{%endblock%}
+{% block left%}
+{%endblock%}
+{%block right%}
+{%endblock%}

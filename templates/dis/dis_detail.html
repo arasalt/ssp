@@ -1,0 +1,40 @@
+{% extends "index.html"%}
+{%block content%}
+
+<div id="content2">
+<h1>Disscussion detail</h1>
+<div id="dis_mini">
+<h2>{{dis|safe}}</h2>
+{{dis.description|safe}}
+<span>Created by:<a href="{%url withoutedit dis.author.id%}">{{dis.author}}</a>-{{dis.create_date}}-{{dis.comment_set.count}} comment</span>
+</div>
+<h1>Comments</h1>
+
+{% for comment in dis.comment_set.all %}
+<div class="comments">
+{% with comment.author.get_profile.image as image %}
+{% if image %}
+<img src="{{ image.url }}">
+{% else %}
+<img src="/media/images/generic50.jpg">
+{% endif %}
+{% endwith %}
+<span>{{comment|safe}}</span>
+<p><a href="{%url withoutedit dis.author.id%}">{{comment.author}}</a></p> 
+
+</div>
+{%empty%}
+No Comment
+{% endfor %}
+	
+
+</div>
+
+{% if user.is_authenticated %}
+<form action="" method="post">{%csrf_token%}
+{{cform.as_p}}
+<input type='submit' value='post' />
+</form>
+{%endif%}
+{%endblock%}
+

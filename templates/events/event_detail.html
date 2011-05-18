@@ -1,0 +1,22 @@
+{%extends "index.html"%}
+{%block content%}
+
+<h2>{{event.title}}</h2>
+<h3>{{event.description|safe}}</h3>
+<p><b>Date:</b></p><p>{{event.date}}</p>
+<p><b>Time start:</b></p><p>{{event.start_time}}</p>
+
+{%for c in event.commentevent_set.all%}
+<ul>
+<p>Commented by <b>{{c.author}}</b> : {{c}}</p>
+
+</ul>
+{%endfor%}
+
+<form action="" method="post">{%csrf_token%}
+		<table>
+{{cform.as_p}}
+</table>
+		<input type='submit' value='post' />
+	</form>
+{%endblock%}

@@ -1,0 +1,13 @@
+{%extends "index.html"%}
+{%block content%}
+{%for e in events%}
+<table>
+<tr>
+<td>
+<a href="{%url event_detail e.id%}">{{e}}</a>
+</td>
+</tr>
+</table>
+{%endfor%}
+<a href="{%url event_create%}">Create Events</a>
+{%endblock%}

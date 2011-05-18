@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>SDU Summer Practice Program</title>
+<meta name="keywords" content="SDU Summer Practice Program Летняя практика в СДУ." />
+<meta name="description" content="Сайт для студентов СДУ и работодателей" />
+<link href="/media/static/master.css" rel="stylesheet" type="text/css" />
+<script src="/media/static/js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+	tinyMCE.init({
+		// General options
+		mode : "textareas",
+		theme : "advanced",
+		plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
+
+		// Theme options
+		theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+		theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+		theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+		theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "bottom",
+		theme_advanced_resizing : true,
+
+		// Example content CSS (should be your site CSS)
+		content_css : "/media/static/js/tinymce/examples/css/content.css",
+
+		// Drop lists for link/image/media/template dialogs
+		template_external_list_url : "lists/template_list.js",
+		external_link_list_url : "lists/link_list.js",
+		external_image_list_url : "lists/image_list.js",
+		media_external_list_url : "lists/media_list.js",
+
+		// Style formats
+		style_formats : [
+			{title : 'Bold text', inline : 'b'},
+			{title : 'Red text', inline : 'span', styles : {color : '#ff0000'}},
+			{title : 'Red header', block : 'h1', styles : {color : '#ff0000'}},
+			{title : 'Example 1', inline : 'span', classes : 'example1'},
+			{title : 'Example 2', inline : 'span', classes : 'example2'},
+			{title : 'Table styles'},
+			{title : 'Table row 1', selector : 'tr', classes : 'tablerow1'}
+		],
+
+		// Replace values for the template plugin
+		template_replace_values : {
+			username : "Some User",
+			staffid : "991234"
+		}
+	});
+</script>
+
+<link href="/media/static/js/themes/ui-lightness/jquery.ui.datepicker.css" rel="stylesheet" type="text/css" />
+<script src="/media/static/js/jquery-1.5.2.min.js" type="text/javascript"></script>
+<script src="/media/static/js/ui/jquery.ui.core.js" type="text/javascript"></script>
+<script src="/media/static/js/ui/jquery.ui.datepicker.js" type="text/javascript"></script>
+
+</head>
+<body>
+{% block top%}
+	<div class="meta">
+
+		<div class="metalinks">
+        	<a href="#"><img src="/media/static/images/meta2.gif" alt="" width="17" height="14" /></a>
+			<a href="#"><img src="/media/static/images/meta1.gif" alt="" width="15" height="14" /></a>
+			<a href="#"><img src="/media/static/images/meta3.gif" alt="" width="17" height="14" /></a>
+			<a href="#"><img src="/media/static/images/meta4.gif" alt="" width="15" height="14" /></a>
+		</div>																																																	
+	</div>
+	
+	<div id="header">
+		<a href="{%url main_page%}"><img src="/media/static/images/logo-2.jpg" style="float:left;"alt="SDUSummer logo" width="148" height="24" /></a>
+		<span class="slogan">Practice Program</span>
+{%if not user.is_authenticated%}
+<script>
+$(function() {
+	var i=0;
+	var img_name = new Array('/media/static/images/4.png','/media/static/images/3.png','/media/static/images/5.png','/media/static/images/1.png');
+	setInterval( function(){
+	var img=new Image();
+	$(img).attr('src',img_name[i]);	
+	$("#slideshow2").html(img);
+	i++;
+	i=i%4;						
+	}, 8000);				
+	});
+</script>
+<div id="slideshow2" ><img src="/media/static/images/bigpicture.jpg" alt=""/></div>
+{%else%}
+<ul id="menu">
+			<li><a href="{%url home_profile %}" accesskey="1" title="">Home </a></li>
+			<li><a href="{%url client_profile user.id%}" accesskey="2" title="">My Profile</a></li>
+			<li><a href="{%url members%}" accesskey="3" title="">Members</a></li>
+			<li><a href="{%url dis_list%}" accesskey="4" title="">Discussions</a></li>
+			<li><a href="{%url file_list%}" accesskey="5" title="">Files</a></li>
+			<li><a href="{%url events_list%}" accesskey="6" title="">Events</a></li>
+			<li><a href="{%url members%}" accesskey="7">Gallery</a></li>
+			<li class="last"><a href="{%url logout%}" accesskey="8" title="">Logout</a></li>
+		</ul>
+{%endif%}
+	</div>
+{%endblock%}
+
+<div id="content1">
+<div id="inner_content">
+{%block right%}	
+{%if not user.is_authenticated %}	
+{%block rightinner%}
+<div id="home_content">
+<h2>Welcome to SDU Summer Practice</h2>
+<p>Добро пожаловать на сайт летней практики Университета им. Сулейман Демиреля!</p><p>Мы убеждены, что образование в области Информационных Технологий должно идти в ногу с требованиями индустрии. Достичь этого можно периодически получая отклики со стороны ведущих компаний страны, работающих в области Информационных Технологий. Наша программа — это попытка сближения сферы производства и образования, предоставляя возможность студентам получить более востребованные знания и практику, учебным заведениям лучше понять тенденции развития индустрии и повысить квалификацию преподавателей, а компаниям в свою очередь получить более квалифицированные кадры. Чтобы подать участие просим Вас заполнить <a href="{%url anketa%}">анкету</a></p>
+</div>
+<div id="login" class="sidebar">	
+	<ul>
+        <h2>Login</h2>
+        <form action="{%url login%}"  method="post" autocomplete="on">{% csrf_token %}
+        <li><label>User Name: </label><input type="text" name="username" value="your name..." size="11" autofocus="autofocus" onfocus="this.value=''"/>
+        </li>
+        <li><label>Password:&nbsp </label><input type="password" name="password" size="11" onfocus="this.value=''"/>
+        </li>
+        <li><input type="submit" value="Submit" /></li>
+		
+		{% csrf_token %}
+		</li>
+		</form>
+	</ul>
+</div>
+<div id="blocks">																																																																																																																													
+			<div class="block">
+				<p class="block_head">О Программе</p>
+				<img src="/media/static/images/map.jpg" alt="" width="214" height="140" /><br />
+				<a href="{%url about_page%}" class="more">Узнать больше</a>
+                <br/>
+			</div>
+			<div class="block">
+				<p class="block_head">Студентам</p>
+				<p class="red_text">Для проекта выбираются топ 10% студентов из числа будущих 3-х и 4-х курсов. Очень важным при отборе студентов для нас является мотивация, желание быть успешными и способность работать что называется «день и ночь». Для участия в программе вам нужно заполнить анкету.</p>
+				<a href="{%url anketa%}" class="more">Заполнить анкету</a>
+                <br/>
+                <br/>
+			</div>
+			<div class="block">
+				<p class="block_head">Выпускники</p>
+				<p class="green_text">Выпускники программы 2010 года на данный момент в большинстве удачно устроились на работу в ведущих компаниях по АЙТИ индустрии Казахстана. Вот как они высказываются по прошедшей практике:</p>
+				<a href="{%url graduated%}" class="more">Узнать больше</a>
+			</div>
+			<div class="block">
+				<p class="block_head">Компаниям</p>
+				<p class="gray_text">Мы сотрудничаем исключительно с компаниями, занимающимися производственной деятельностью, т.е. разработкой собственных программных продуктов. Ваша компания может подать заявку на участие</p>
+				<a href="#" class="more">Подать заявку</a>
+			</div>
+		</div>
+{%endblock%}
+		<div id="info">
+        <!--for parteners-->
+			<div id= "leftdiv">
+				<h2>Наши партнеры</h2>
+				<ul>
+					<li><a href="http://p-s.kz/"><img id="logoimg" src="/media/static/images/logos/p-s.png" alt="primesource" /></a></li>
+					<li><a href="http://www.bee.kz/about_careers.html"><img id="logoimg" src="/media/static/images/logos/beesoft.png" alt="beesoftware"/></a></li>
+					<li><a href="http://www.kkb.kz/"><img id="logoimg" src="/media/static/images/logos/kazkom.jpg" alt=""/></li>
+					<li><a href="http://bpsolutions.kz/"><img id="logoimg" src="/media/static/images/logos/bpsolutions.png" alt=""/></a></li>
+					<li><a href="http://ott.kz/"><img id="logoimg" src="/media/static/images/logos/ott.jpg" alt=""/></a></li>
+					<li><a href="http://diamondIT.kz/"><img id="logoimg" src="/media/static/images/logos/diamondIT.jpg" alt=""/></a></li>
+				</ul>
+			</div>
+			<div id ="rightdiv">
+				<h2>Контакты</h2>
+				<ul>
+					<li>По вопросам обращайтесь по следующим контактам:</li>
+					<li>anzor.israilov@gmail.com</li>
+					<li>tasalta@gmail.com</li>
+					<li>zhakaarai@gmail.com</li>
+					<li>Телефоны:</li>
+					<li>87014377474(Арайлым), 87015527795(Салтанат)</li>
+				</ul>
+			</div>
+		</div>
+
+{%endif%}
+{%endblock%}
+{%block content%}
+{%endblock%}
+</div>
+</div>
+<div id="footer">
+	<p>Almaty 2011</p>
+</div>
+</body>
+</html>

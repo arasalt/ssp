@@ -1,0 +1,9 @@
+{%extends "index.html"%}
+{%block content%}
+Choose your avatar
+<form method="POST" action="{%url avatar%}" accept-charset="utf-8" enctype="multipart/form-data">{%csrf_token%}
+{{avatar.as_p}}
+<input type="submit" value="submit">
+</form>
+{%endblock%}
+

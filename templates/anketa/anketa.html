@@ -1,0 +1,36 @@
+{%extends "index.html"%}
+{%block top%}
+    <div class="meta">
+        <div class="metalinks">
+            <a href="#"><img src="/media/static/images/meta2.gif" alt="" width="17" height="14" /></a>
+            <a href="#"><img src="/media/static/images/meta1.gif" alt="" width="15" height="14" /></a>
+            <a href="#"><img src="/media/static/images/meta3.gif" alt="" width="17" height="14" /></a>
+            <a href="#"><img src="/media/static/images/meta4.gif" alt="" width="15" height="14" /></a>
+        </div>                                                                                                                                                                                                    
+    </div>
+    
+    <div id="header">
+        <a href="{%url main_page%}"><img src="/media/static/images/logo-2.jpg" style="float:left;"alt="SDUSummer logo" width="148" height="24" />
+        </a><span class="slogan">Practice Program</span>
+    </div>
+{%endblock%}
+{%block rightinner%}
+<div class="reg" id="register">
+<ul>
+
+<h2>Анкета</h2>
+<form enctype="multipart/form-data" action="" autocomplete="on" method="post" >
+{% csrf_token %}    
+<li>
+<table>
+{{ anketaform.as_table }}
+</table>
+</li>
+<li>
+<input type="submit" value="Enter" />
+</li>
+</form>
+</ul>
+</div>
+</div>
+{%endblock%}

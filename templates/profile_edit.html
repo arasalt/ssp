@@ -1,0 +1,24 @@
+{%extends "index.html"%}
+{%block content%}
+<div id= "content2">
+<h1><span>Edit profile</span></h1>
+<table>
+<tr>
+{%if client.image%}
+<td><img src={{client.image.url}}></td>
+{%else%}
+<td><img  src="/media/avatars/generic50_1.jpg"></td>
+{%endif%}
+<td><a href="{%url avatar %}">Change</a></td>
+</tr>
+<form method="post" action="" accept-charset="utf-8" enctype="multipart/form-data">{% csrf_token %}
+{{form.as_table}}
+<td>CV:</td><td>{{client.files}}</td><td><a href="{%url cv%}">Upload your Cv</a></td>
+<tr>
+<td></td><td><input type="submit" value="save"></td>
+</tr>
+</form>
+
+</table>
+</div>
+{%endblock%}

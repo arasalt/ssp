@@ -1,0 +1,21 @@
+{%extends "index.html"%}
+{%block content%}
+<div id= "content2">
+    <h1><span>Disscussions</span></h1>
+    {%for dis in diss%}
+    <div id="dis_mini">
+    {% with dis.author.get_profile.image as image %}
+    {% if image %}
+        <img src="{{ image.url }}">
+    {% else %}
+        <img src="/media/images/generic50.jpg">
+    {% endif %}
+    {% endwith %}
+    <h2><a href="{%url dis_detail dis.id%}">{{dis}}</a></h2>
+    <p>{{ dis.description|safe|truncatewords_html:20 }}</p>
+    <span>Created by:<a href="{%url withoutedit dis.author.id%}">{{dis.author}}</a>-{{dis.create_date}}-{{dis.comment_set.count}} comment</span>
+    </div>
+{%endfor%}
+<a href="{%url create_dis%}">Create Discussion</a>
+</div>
+{%endblock%}

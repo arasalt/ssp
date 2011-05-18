@@ -1,0 +1,18 @@
+{%extends "index.html"%}
+{%block content%}
+<div id= "content2">
+<h1><span>Members</span></h1>
+<table>
+{%for member in members%}
+	<tr>
+		{%if member.image%}
+			<td><img src="{{member.image.url}}"></td>
+		{%else%}
+			<td><img src="/media/avatars/generic50_1.jpg"></td>
+		{%endif%}
+		<td><a href="{%url withoutedit member.id%}">{{member}}</a></td>
+	</tr>
+{%endfor%}
+</table>
+</div>
+{%endblock%}
