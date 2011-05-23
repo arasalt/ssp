@@ -1,4 +1,5 @@
 from anketa.models import *
+from reg.models import *
 from anketa.forms import *
 from django.shortcuts import render_to_response 
 from django.http import HttpResponseRedirect
@@ -6,6 +7,11 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.conf import settings
+import sha
+import random
+import re
+SHA1_RE = re.compile('^[0-9]$')
 
 
 def anketa(request):
@@ -41,9 +47,12 @@ def anketa_detail(request,anketa_id):
 
 @login_required
 def invite(request,anketa_id):
+    salt = sha.new(str(random.random())).hexdigest()[:9]
+    entry=Entry(salt=salt,registrated=False)
+    entry.save()
     anketa=Anketa.objects.get(id=anketa_id)
-    send_mail('Invite','Pozdravliaem','admin@gmail.com',['anketa@mail.mu'],fail_silently=False)
-    return render_to_response("anketa/message.html")
+    send_mail('Приглашение','Поздравляем вас!!!!Вы прошли на практику SDU Summer Program.Просим вас пройти по этой ссылке и зарегистрироваться'+ 'http://ssp.buben.kz/account/register/'+salt,'sdusummer@gmail.com',[anketa.mail],fail_silently=False)
+    return render_to_response("anketa/authen.html")
 
 
 def cv(request):

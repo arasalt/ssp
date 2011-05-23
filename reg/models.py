@@ -14,27 +14,27 @@ class ClientManager(models.Manager):
     	new_user.is_activate=True
     	new_user.save()
     	client=Client(user=new_user)
+        print client
     	client.user_id=new_user.id
     	client.name=name
     	client.surname=surname
-    	#salt = sha.new(str(random.random())).hexdigest()[:5]
-            #activation = sha.new(salt+new_user.username).hexdigest()
-    	client.activation_key="Activated"
+        client.activation_key="Activated"
     	client.save()	
 
 class Client(models.Model):
 	user=models.ForeignKey(User,unique=True)
-	name=models.CharField(max_length=30)
-	surname=models.CharField(max_length=30)
-	location=models.CharField(max_length=30)
-	about=models.CharField(max_length=60)
-	image = models.ImageField(upload_to="userdata/avatars/", storage=default_storage)
-	files=models.FileField(upload_to="userdata/files/")
-	activation_key=models.CharField(('activation_key'),max_length=40)
-	activated=models.BooleanField(default=False)
-	create_date = models.DateField(auto_now_add = True)
-        organizator=models.BooleanField(default=False)
-        modified_date = models.DateField(auto_now = True)
+	name=models.CharField(max_length=30,blank=True)
+	surname=models.CharField(max_length=30,blank=True)
+	location=models.CharField(max_length=30,blank=True)
+	about=models.CharField(max_length=60,blank=True)
+	image = models.ImageField(upload_to="userdata/avatars/", storage=default_storage,blank=True)
+	files=models.FileField(upload_to="userdata/files/",blank=True)
+	activation_key=models.CharField(('activation_key'),max_length=40,blank=True)
+	activated=models.BooleanField(default=False,blank=True)
+	create_date = models.DateField(auto_now_add = True,blank=True)
+        organizator=models.BooleanField(default=False,blank=True)
+        modified_date = models.DateField(auto_now = True,blank=True)
+        
 	
 	objects=ClientManager()
 
@@ -52,7 +52,12 @@ class Client(models.Model):
 
 	def upload_to_dir(self,filename):
 		return 'userdata/files/%s' % (filename)
-		
+        
+class Entry(models.Model):
+    salt=models.CharField(max_length=9)
+    registrated=models.BooleanField(default=False)
+    def __unicode__(self):
+        return self.salt
 #	@permalink
 #    	def link_to_avatar(self):
  #       return ('account_avatar', (), {})

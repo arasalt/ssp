@@ -10,10 +10,12 @@ from django.core.files.base import ContentFile
 from cStringIO import StringIO
 import Image 
 from django.contrib.auth.decorators import login_required
+from django.core.context_processors import request
+from django.utils.safestring import SafeUnicode
 #import File
 
 def login(request):
-	if request.method == "POST":
+    if request.method == "POST":
 		lf = LoginForm(request.POST)
 		if lf.is_valid():
 			user = authenticate(username = lf.cleaned_data.get('username'),password = lf.cleaned_data.get('password'))
@@ -23,27 +25,58 @@ def login(request):
 				client=Client.objects.get(user=user)
 				rc = RequestContext(request,{'client':client})
 				return HttpResponseRedirect(reverse('home_profile'))
-	else:
+    else:
 		lf = LoginForm()
-	rc = RequestContext(request, {'form' : lf})
+    rc = RequestContext(request, {'form' : lf})
 	
-	return render_to_response('index.html',rc)
+    return render_to_response('index.html',rc)
 @login_required
 def logout(request):
 	do_logout(request)
 	return redirect('main_page')
+def register(request,id):
+	url =request.get_full_path()
+	salt=SafeUnicode(url[18:])
+	entry=Entry.objects.get(salt=salt)
+	if request.method=="POST":
+		if entry.registrated==False:
+			rf=RegForm(request.POST)
+			print rf
+			if rf.is_valid():
+				rf.save()
+				entry.registrated=True
+				entry.save()
+				rc=RequestContext(request,{'message':'You must validate your registration'})
+				return render_to_response('reg/message.html',rc)
+			else:
+				rf=RegForm(request.POST)
+			rc=RequestContext(request,{'form':rf})
+			return render_to_response('reg/reg.html',rc)
+             		
+   		else:
+			rc=RequestContext(request,{'message':'This id have been already registrated'})
+		return render_to_response('reg/registrated.html')	
+	else:
+    			
+			rf=RegForm()
+	rc=RequestContext(request,{'form':rf})
+	return render_to_response('reg/reg.html',rc)
 
-def register(request):
-    if request.method == "POST":
-        rf= RegForm(request.POST)
-        if rf.is_valid():
-            rf.save()
-            rc = RequestContext(request, {'message' : 'You must validate your registration. Instruction was sent to you email.'})
-            return render_to_response('reg/message.html', rc)
-    else:
-        rf = RegForm()
-    rc = RequestContext(request, {'form' : rf})
-    return render_to_response('reg/reg.html', rc)
+#def register(request,id):
+#	url=request.get_full_path()
+#	print url
+#    if request.method == "POST":
+#	    rf= RegForm(request.POST)
+#        if rf.is_valid():
+#            rf.save()
+#            rc = RequestContext(request, {'message' : 'You must validate your registration. Instruction was sent to you email.'})
+#            return render_to_response('reg/message.html', rc)
+#    else:
+#        rf = RegForm()
+#    rc = RequestContext(request, {'form' : rf})
+#    return render_to_response('reg/reg.html', rc)
+#
+
 
 @login_required
 def avatar(request):
