@@ -1,3 +1,4 @@
+#coding=utf8
 from anketa.models import *
 from reg.models import *
 from anketa.forms import *
