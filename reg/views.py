@@ -117,16 +117,21 @@ def cv(request):
 		cv=CvForm()
 	rc=RequestContext(request,{'cv':cv})
 	return render_to_response("cv.html",rc)
-@login_required		
+@login_required        
 def client_profile(request,u_id):
-	client=Client.objects.get(pk = u_id)
-	rc=RequestContext(request,{'client':client})
-	return render_to_response("client_profile.html",rc)
+    user=User.objects.get(pk=u_id)
+    
+    client=Client.objects.get(user=user)
+    rc=RequestContext(request,{'client':client})
+    return render_to_response("client_profile.html",rc)
+
 @login_required
 def withoutedit(request,user_id):
-	client=Client.objects.get(pk = user_id)
-	rc=RequestContext(request,{'client':client})
-	return render_to_response("withoutedit.html",rc)
+    user=User.objects.get(pk=user_id)
+    client=Client.objects.get(user = user)
+    rc=RequestContext(request,{'client':client})
+    return render_to_response("withoutedit.html",rc)
+
 @login_required
 def profile_edit(request,user_id):
 	client=Client.objects.get(pk=user_id)

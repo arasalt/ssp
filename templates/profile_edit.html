@@ -13,7 +13,6 @@
 </tr>
 <form method="post" action="" accept-charset="utf-8" enctype="multipart/form-data">{% csrf_token %}
 {{form.as_table}}
-<td>CV:</td><td>{{client.files}}</td><td><a href="{%url cv%}">Upload your Cv</a></td>
 <tr>
 <td></td><td><input type="submit" value="save"></td>
 </tr>

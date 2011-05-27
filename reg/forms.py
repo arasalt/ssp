@@ -12,7 +12,7 @@ class CvForm(forms.Form):
 class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
-        exclude = ('username', 'activation_key', 'activated', 'image','files')
+        exclude = ('user', 'activation_key', 'activated', 'image','files','organizator')
 
 class LoginForm(forms.Form):
 	username=forms.CharField(max_length=30)
