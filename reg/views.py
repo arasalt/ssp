@@ -139,7 +139,7 @@ def profile_edit(request,user_id):
 		pf=ClientForm(request.POST,instance=client)
 		if pf.is_valid():
 			pf.save()
-			return HttpResponseRedirect(reverse('client_profile',args=(user.id,)))
+			return HttpResponseRedirect(reverse('client_profile',args=(request.user.id,)))
 
 	else:
 		pf=ClientForm(instance=client)

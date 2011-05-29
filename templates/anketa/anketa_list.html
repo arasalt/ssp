@@ -1,36 +1,5 @@
 {%extends "client_page.html"%}
 
-{% block top%}
-	<div class="meta">
-
-		<div class="metalinks">
-        	<a href="#"><img src="/media/static/images/meta2.gif" alt="" width="17" height="14" /></a>
-			<a href="#"><img src="/media/static/images/meta1.gif" alt="" width="15" height="14" /></a>
-			<a href="#"><img src="/media/static/images/meta3.gif" alt="" width="17" height="14" /></a>
-			<a href="#"><img src="/media/static/images/meta4.gif" alt="" width="15" height="14" /></a>
-		</div>																																																	
-	</div>
-	
-	<div id="header">
-		<a href=""><img src="/media/static/images/logo-2.jpg" style="float:left;"alt="SDUSummer logo" width="148" height="24" /></a>
-		<span class="slogan">Practice Program</span>
-
-
-<ul id="menu">
-			<li><a href="{%url home_profile %}" accesskey="1" title="">Home </a></li>
-			<li><a href="{%url client_profile user.id%}" accesskey="2" title="">My Profile</a></li>
-			<li><a href="{%url members%}" accesskey="3" title="">Members</a></li>
-			<li><a href="{%url dis_list%}" accesskey="4" title="">Discussions</a></li>
-			<li><a href="{%url file_list%}" accesskey="5" title="">Files</a></li>
-			<li><a href="{%url events_list%}" accesskey="6" title="">Events</a></li>
-			{%if user.get_profile.organizator%}
-			<li><a href="{%url anketa_list%}" accesskey="8">Anketa</a></li>
-			{%endif%}
-			<li class="last"><a href="{%url logout%}" accesskey="8" title="">Logout</a></li>
-		</ul>
-	</div>
-{%endblock%}
-
 {%block content%}
 <div id= "content2">
 <h1><span>Anketa List</span></h1>

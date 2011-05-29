@@ -1,6 +1,7 @@
 {%extends "client_page.html"%}
 {%block content%}
-
+<div id= "content2">
+    <h1><span>Новое событие</span></h1>
 <h2>Create Event</h2>
 <form action="" method="post">{%csrf_token%}
 {{eform.as_p}}		
@@ -12,4 +13,5 @@ $( "#id_date" ).datepicker();
 </script>
 		<input type='submit' value='create' />
 	</form>
+</div>
 {%endblock%}

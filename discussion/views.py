@@ -1,6 +1,8 @@
 # Create your views here.
 from discussion.models import *
 from discussion.forms import *
+from event.models import *
+from event.forms import *
 from django.shortcuts import render_to_response 
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
@@ -9,9 +11,9 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def home_profile(request):
-	author=User.objects.get(username=request.user)
-		
-	rc=RequestContext(request,{'author':author})
+	diss=Discussion.objects.all().order_by('-create_date')[:5]
+	events=Event.objects.all().order_by('-date')[:5]		
+	rc=RequestContext(request,{'diss':diss,'events':events,})
 	return render_to_response("home_profile.html",rc)
 @login_required
 def create_dis(request):
@@ -43,6 +45,27 @@ def dis_detail(request,dis_id):
 	return render_to_response("dis/dis_detail.html",rc)
 @login_required	
 def dis_list(request):
-	diss=Discussion.objects.all().order_by('create_date')[:10]
+	diss=Discussion.objects.all().order_by('-create_date')
 	rc=RequestContext(request,{'diss':diss})
 	return render_to_response("dis/dis_list.html",rc)
+@login_required
+def dis_edit(request,dis_id):
+	dis=Discussion.objects.get(id=dis_id)
+	if request.user==dis.author:
+		if request.method=="POST":
+			df=DisForm(request.POST,instance=dis)
+			if df.is_valid():
+				df.save()
+				return HttpResponseRedirect(reverse("dis_detail",args=(dis.id,)))
+		else:
+			df=DisForm(instance=dis)
+			rc=RequestContext(request,{'df':df})
+			return render_to_response("dis/create_dis.html",rc)
+	else:
+		return HttpResponseRedirect(reverse("dis_detail",args=(dis.id,)))
+@login_required	
+def dis_delete(request,dis_id):
+	dis=Discussion.objects.get(id=dis_id)
+	if request.user==dis.author:
+		dis.delete()
+	return HttpResponseRedirect(reverse("dis_list"))

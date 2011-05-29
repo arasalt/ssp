@@ -8,15 +8,17 @@
 {{dis.description|safe}}
 <span>Created by:<a href="{%url withoutedit dis.author.id%}">{{dis.author}}</a>-{{dis.create_date}}-{{dis.comment_set.count}} comment</span>
 </div>
+
+<div id="sharebar" class="copy fix"><div class="copy-pad"><div class="post-footer"><div class="left"> Вы можете поделиться постом!</div><div class="right"> <a href="http://www.facebook.com/sharer.php?u={%url dis_detail dis.id%}&amp;t={{dis}}" title="Share on Facebook" rel="nofollow" target="_blank"><img src="http://www.pagelines.com/demos/platformpro/wp-content/themes/platformpro/images/ico-facebook.png" alt="Facebook"></a><a href="http://twitter.com/?status=http://pln.so/u76" title="Share on Twitter" rel="nofollow" target="_blank"><img src="http://www.pagelines.com/demos/platformpro/wp-content/themes/platformpro/images/ico-twitter.png" alt="Twitter"></a><a href="http://del.icio.us/post?url=http://www.pagelines.com/demos/platformpro/posts/1/&amp;title=Drag+%26%23038%3B+Drop+Design" title="Share on Delicious" rel="nofollow" target="_blank"><img src="http://www.pagelines.com/demos/platformpro/wp-content/themes/platformpro/images/ico-del.png" alt="Delicious"></a> <a href="http://digg.com/submit?phase=2&amp;url=http://www.pagelines.com/demos/platformpro/posts/1/&amp;title=Drag+%26%23038%3B+Drop+Design" title="Share on Digg" rel="nofollow" target="_blank"><img src="http://www.pagelines.com/demos/platformpro/wp-content/themes/platformpro/images/ico-digg.png" alt="Digg"></a></div><div class="clear"></div></div><div class="clear"></div></div></div>
 <h1>Comments</h1>
 
 {% for comment in dis.comment_set.all %}
 <div class="comments">
 {% with comment.author.get_profile.image as image %}
 {% if image %}
-<img src="{{ image.url }}">
+<img width="48" src="{{ image.url }}">
 {% else %}
-<img src="/media/static/images/default.png">
+<img src="/media/static/images/per.png">
 {% endif %}
 {% endwith %}
 <span>{{comment|safe}}</span>
@@ -26,15 +28,15 @@
 {%empty%}
 No Comment
 {% endfor %}
-	
-
-</div>
-
 {% if user.is_authenticated %}
 <form action="" method="post">{%csrf_token%}
 {{cform.as_p}}
 <input type='submit' value='post' />
 </form>
+
+</div>
+
+
 {%endif%}
 {%endblock%}
 

@@ -1,8 +1,11 @@
 {%extends "client_page.html"%}
 {%block content%}
+<div id= "content2">
+    <h1><span>Новый пост</span></h1>
 <form method="post" action="">{%csrf_token%}
 
 {{df.as_p}}
 <input type="submit" value="create">
 </form>
+</div>
 {%endblock%}

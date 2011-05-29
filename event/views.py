@@ -39,4 +39,24 @@ def event_create(request):
         eform=EventForm(instance=event)
     rc=RequestContext(request,{'eform':eform})
     return render_to_response("events/event_create.html",rc)
-         
+@login_required
+def event_edit(request,event_id):
+    event=Event.objects.get(id=event_id)
+    if request.user==event.author:
+        if request.method=="POST":
+            eform=EventForm(request.POST,instance=event)
+            if eform.is_valid():
+                eform.save()
+                return HttpResponseRedirect(reverse("event_detail",args=(event.id,)))
+        else:
+            eform=EventForm(instance=event)
+        rc=RequestContext(request,{'eform':eform})
+        return render_to_response("events/event_create.html",rc)
+    else:
+        return HttpResponseRedirect(reverse("event_detail",args=(event.id,)))
+@login_required    
+def event_delete(request,event_id):
+    event=Event.objects.get(id=event_id)
+    if request.user==event.author:
+        event.delete()
+    return HttpResponseRedirect(reverse("events_list"))

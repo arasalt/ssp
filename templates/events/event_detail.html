@@ -1,22 +1,37 @@
 {%extends "client_page.html"%}
 {%block content%}
-
-<h2>{{event.title}}</h2>
-<h3>{{event.description|safe}}</h3>
+<div id= "content2">
+    <h1><span>Детали События</span></h1>
+<div id="dis_mini">
+<h2>{{event|safe}}</h2>
+{{event.description|safe}}
 <p><b>Date:</b></p><p>{{event.date}}</p>
 <p><b>Time start:</b></p><p>{{event.start_time}}</p>
-
-{%for c in event.commentevent_set.all%}
-<ul>
-<p>Commented by <b>{{c.author}}</b> : {{c}}</p>
-
-</ul>
-{%endfor%}
-
+<span class="spanpos">Приглашает на событие: <a href="{%url withoutedit event.author.id%}">{{event.author}}</a>  {{event.commentevent_set.count}} комментариев</span>
+<span class="edit_delete"><a href="{%url event_edit event.id %}">edit</a><a href="{%url event_delete event.id %}">delete</a></span>
+</div>
+<h1>Комментарии</h1>
+{%for comment in event.commentevent_set.all%}
+<div class="comments">
+{% with comment.author.get_profile.image as image %}
+{% if image %}
+<img width="48" src="{{ image.url }}">
+{% else %}
+<img src="/media/static/images/per.png">
+{% endif %}
+{% endwith %}
+<span>{{comment|safe}}</span>
+<p><a href="{%url withoutedit event.author.id%}">{{comment.author}}</a></p> 
+</div>
+{%empty%}
+No Comment
+{% endfor %}
+{% if user.is_authenticated %}
 <form action="" method="post">{%csrf_token%}
-		<table>
 {{cform.as_p}}
-</table>
-		<input type='submit' value='post' />
-	</form>
+<input type='submit' value='post' />
+</form>
+
+</div>
+{%endif%}
 {%endblock%}

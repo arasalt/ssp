@@ -5,11 +5,11 @@
 <table>
 <tr>
 {%if client.image%}
-<td><img src={{client.image.url}}></td>
+<td><img width="48" src={{client.image.url}}></td>
 {%else%}
-<td><img  src="/media/static/images/default.png"></td>
+<td><img  src="/media/static/images/per.png"></td>
 {%endif%}
-<td><a href="{%url avatar %}">Change</a></td>
+<td><a width="48" href="{%url avatar %}">Change</a></td>
 </tr>
 <form method="post" action="" accept-charset="utf-8" enctype="multipart/form-data">{% csrf_token %}
 {{form.as_table}}

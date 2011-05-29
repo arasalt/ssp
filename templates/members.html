@@ -6,11 +6,11 @@
 {%for member in members%}
 	<tr>
 		{%if member.image%}
-			<td><img src="{{member.image.url}}"></td>
+			<td><img width="48" src="{{member.image.url}}"></td>
 		{%else%}
-			<td><img src="/media/static/images/default.png"></td>
+			<td><img src="/media/static/images/per.png"></td>
 		{%endif%}
-		<td><a href="{%url withoutedit member.id%}">{{member}}</a></td>
+		<td><a href="{%url withoutedit member.user.id%}">{{member}}</a></td>
 	</tr>
 {%endfor%}
 </table>

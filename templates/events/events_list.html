@@ -1,13 +1,15 @@
 {%extends "client_page.html"%}
 {%block content%}
-{%for e in events%}
-<table>
-<tr>
-<td>
-<a href="{%url event_detail e.id%}">{{e}}</a>
-</td>
-</tr>
-</table>
+<div id= "content2">
+    <h1><span>Все события</span></h1>
+    {%for e in events%}
+    <div id="dis_mini">
+    <h2><a href="{%url event_detail e.id%}">{{e}}</a></h2>
+    <p>{{ e.description|safe|truncatewords_html:20 }}</p>
+    <span class="spanpos">Приглашает на событие: <a href="{%url withoutedit e.author.id%}">{{e.author}}</a>  {{e.commentevent_set.count}} комментариев</span>
+    <span class="edit_delete"><a href="{%url event_edit e.id %}">edit</a><a href="{%url event_delete e.id %}">delete</a></span>
+    </div>
 {%endfor%}
 <a href="{%url event_create%}">Create Events</a>
+</div>
 {%endblock%}

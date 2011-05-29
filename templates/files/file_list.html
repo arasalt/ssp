@@ -1,5 +1,7 @@
 {%extends "client_page.html"%}
 {%block content%}
+<div id= "content2">
+    <h1><span>Файловая директория</span></h1>
 <ul>
 
 {% for uf in list %}
@@ -14,4 +16,5 @@
 <h2><a href="{%url upload_file%}">Upload file</a></h2>
 </li>
 </ul>
+</div>
 {%endblock%}

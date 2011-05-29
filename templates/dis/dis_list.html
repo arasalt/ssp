@@ -6,14 +6,15 @@
     <div id="dis_mini">
     {% with dis.author.get_profile.image as image %}
     {% if image %}
-        <img src="{{ image.url }}">
+        <img width="48" src="{{ image.url }}">
     {% else %}
-        <img src="/media/static/images/default.png">
+        <img src="/media/static/images/per.png">
     {% endif %}
     {% endwith %}
     <h2><a href="{%url dis_detail dis.id%}">{{dis}}</a></h2>
     <p>{{ dis.description|safe|truncatewords_html:20 }}</p>
-    <span>Created by:<a href="{%url withoutedit dis.author.id%}">{{dis.author}}</a>-{{dis.create_date}}-{{dis.comment_set.count}} comment</span>
+    <span class="spanpos">Created by:<a href="{%url withoutedit dis.author.id%}">{{dis.author}}</a>-{{dis.create_date}}-{{dis.comment_set.count}} comment</span>
+    <span class="edit_delete"><a href="{%url dis_edit dis.id %}">edit</a><a href="{%url dis_delete dis.id %}">delete</a></span>
     </div>
 {%endfor%}
 <a href="{%url create_dis%}">Create Discussion</a>
