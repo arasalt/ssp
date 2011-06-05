@@ -1,17 +1,29 @@
 {%extends "client_page.html"%}
 {%block content%}
 <div id= "content2">
-	<h1><span>Новые события</span></h1>
+	<h1><span>Новые события</span></h1>  
+	<div class=" jcarousel-skin-tango"><div class="jcarousel-container jcarousel-container-horizontal" style="position: relative; display: block; "><div class="jcarousel-clip jcarousel-clip-horizontal" style="position: relative; "><ul id="mycarousel" class="jcarousel-list jcarousel-list-horizontal" style="overflow-x: hidden; overflow-y: hidden; position: relative; top: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; width: 950px; left: 0px; ">
 	{%for e in events%}
-    <div id="dis_mini">
-    <h2><a href="{%url event_detail e.id%}">{{e}}</a></h2>
-    <p>{{ e.description|safe|truncatewords_html:20 }}</p>
-    <span class="spanpos">Приглашает на событие: <a href="{%url withoutedit e.author.id%}">{{e.author}}</a>  {{e.commentevent_set.count}} комментариев</span>
-    <span class="edit_delete"><a href="{%url event_edit e.id %}">edit</a><a href="{%url event_delete e.id %}">delete</a></span>
+	<li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-1 jcarousel-item-1-horizontal" style="float: left; list-style-type: none; list-style-position: initial; list-style-image: initial; " jcarouselindex="1"><div id="eve_mini">
+    <h2 class="title"><a href="{%url event_detail e.id%}">{{e}}</a></h2>
+    <p>{{e.date}} {{e.start_time}}</p>
+    <span class="created spanpos"> Автор: <a href="{%url withoutedit e.author.id%}">{{e.author}}</a>  {{e.commentevent_set.count}} отзывов</span>
+    {% ifequal user.id e.author.id %}
+    <div class="sup">
+    <ul>
+    <li class="left"><span class="ui-icon ui-icon-pencil"></span></li>
+    <li class="left"><a href="{%url event_edit e.id %}">ред.</a></li>
+    <li class="left"><span class="ui-icon ui-icon-close"></span></li>
+    <li class="left"><a href="{%url event_delete e.id %}">удалить</a></li>
+    </ul>
     </div>
-	{%endfor%}
-	<a href="{%url event_create%}">Create Events</a>
+    {% endifequal %}
+    </div></li>
+	{%endfor%}  
+	</ul></div><div class="jcarousel-prev jcarousel-prev-horizontal jcarousel-prev-disabled jcarousel-prev-disabled-horizontal" style="display: block; " disabled="true"></div><div class="jcarousel-next jcarousel-next-horizontal" style="display: block; " disabled="false"></div></div></div>
     
+
+	
     <h1><span>Новые дискуссии</span></h1>
     {%for dis in diss%}
     <div id="dis_mini">
@@ -22,14 +34,23 @@
         <img src="/media/static/images/per.png">
     {% endif %}
     {% endwith %}
-    <h2><a href="{%url dis_detail dis.id%}">{{dis}}</a></h2>
+    <h2 class="title"><a href="{%url dis_detail dis.id%}">{{dis}}</a></h2>
     <p>{{ dis.description|safe|truncatewords_html:20 }}</p>
-    <span class="spanpos">Created by:<a href="{%url withoutedit dis.author.id%}">{{dis.author}}</a>-{{dis.create_date}}-{{dis.comment_set.count}} comment</span>
-    <span class="edit_delete"><a href="{%url dis_edit dis.id %}">edit</a><a href="{%url dis_delete dis.id %}">delete</a></span>
+    <span class="created spanpos">Created by:<a href="{%url withoutedit dis.author.id%}">{{dis.author}}</a>-{{dis.create_date}}-{{dis.comment_set.count}} comment</span>
+    {% ifequal user.id dis.author.id %}
+    <div class="sup">
+    <ul>
+    <li class="left"><span class="ui-icon ui-icon-pencil"></span></li>
+    <li class="left"><a href="{%url dis_edit dis.id %}">ред.</a></li>
+    <li class="left"><span class="ui-icon ui-icon-close"></span></li>
+    <li class="left"><a href="{%url dis_delete dis.id %}">удалить</a></li>
+    </ul>
     </div>
+    {% endifequal %}
+    </div>
+    
+    
 {%endfor%}
-<a href="{%url create_dis%}">New Discussion</a>
-
 </div>
 {%endblock%}
 

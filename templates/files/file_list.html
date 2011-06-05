@@ -3,18 +3,10 @@
 <div id= "content2">
     <h1><span>Файловая директория</span></h1>
 <ul>
-
 {% for uf in list %}
-    <li>{{ uf.user }} - <a href="{{ uf.file.url }}">{{uf.file.name}}</a></li>
+    <li><a href="{{ uf.file.url }}"><span title="download" class="ico upload"></span>{{uf.file.name}}</a>
+     by <a href="{%url withoutedit uf.user.id%}">{{uf.user}}</a></li>
 {% endfor %}
-</ul>
-
-
-
-<ul>
-<li>
-<h2><a href="{%url upload_file%}">Upload file</a></h2>
-</li>
 </ul>
 </div>
 {%endblock%}

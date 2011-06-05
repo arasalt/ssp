@@ -10,7 +10,8 @@
 <link type="text/css" href="/media/static/js/themes/smoothness/jquery-ui.css" rel="Stylesheet" />	
 <script type="text/javascript" src="/media/static/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" src="/media/static/js/jquery-ui-1.8.13.custom.min.js"></script>
-
+<script type="text/javascript" src="/media/static/js/jcarousel/lib/jquery.jcarousel.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/media/static/js/jcarousel/skins/tango/skin.css" />
 <link href="/media/static/master.css" rel="stylesheet" type="text/css" />
 <script src="/media/static/js/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript">
@@ -18,13 +19,16 @@
 		// General options
 		mode : "textareas",
 		theme : "advanced",
-		plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
-
+		//plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
+		plugins : 'inlinepopups',
+		theme_advanced_buttons1 : "bold,italic,underline,separator,strikethrough,justifyleft,justifycenter,justifyright, justifyfull,bullist,numlist,undo,redo,link,unlink",
+    	theme_advanced_buttons2 : "",
+     	theme_advanced_buttons3 : "",
 		// Theme options
-		theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
-		theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
-		theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
-		theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft",
+		//theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
+		//theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+		//theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+		//theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft",
 		theme_advanced_toolbar_location : "top",
 		theme_advanced_toolbar_align : "left",
 		theme_advanced_statusbar_location : "bottom",
@@ -34,10 +38,10 @@
 		content_css : "/media/static/js/tinymce/examples/css/content.css",
 
 		// Drop lists for link/image/media/template dialogs
-		template_external_list_url : "lists/template_list.js",
-		external_link_list_url : "lists/link_list.js",
-		external_image_list_url : "lists/image_list.js",
-		media_external_list_url : "lists/media_list.js",
+		//template_external_list_url : "lists/template_list.js",
+		//external_link_list_url : "lists/link_list.js",
+		//external_image_list_url : "lists/image_list.js",
+		//media_external_list_url : "lists/media_list.js",
 
 		// Style formats
 		style_formats : [
@@ -59,17 +63,22 @@
 </script>
 <script type="text/javascript">
 $(document).ready(function() {
-$("#content2 > div").mouseenter(function() {
- $(this).css('background-color','#f5f5f5');
- });
-$("#content2 > div").mouseleave(function() {
- $(this).css('background-color','white');
- });
+$("div.sup").hide();
+
+$("div#dis_mini, div#eve_mini").mouseenter(function(){
+$(this).css('background-color','#fbfbfb');
+$(this).find('div.sup').fadeIn("normal");
 });
+$("div#dis_mini, div#eve_mini").mouseleave(function(){
+$(this).css('background-color','white');
+$(this).find('div.sup').hide();
+			}
+);
+$('#mycarousel').jcarousel();
+
+});
+
 </script>
-<link href="/media/static/js/themes/ui-lightness/jquery.ui.datepicker.css" rel="stylesheet" type="text/css" />
-<script src="/media/static/js/jquery-1.5.2.min.js" type="text/javascript"></script>
-<script src="/media/static/js/ui/jquery.ui.core.js" type="text/javascript"></script>
 <script src="/media/static/js/ui/jquery.ui.datepicker.js" type="text/javascript"></script>
 
 </head>
@@ -119,32 +128,28 @@ $("#content2 > div").mouseleave(function() {
 	<h3>{{c}}</h3>
 	{%endfor%}
 	<ul>
-		<li class="last"><a href="{%url logout%}" title="выйти">Выйти</a></li>
+		<li><a href="{%url logout%}" title="выйти">Выйти</a></li>
         <li><a href="{%url client_profile user.id%}" title="изменить профиль">Профиль</a></li>        		
 	</ul>
-	<h3>Добавить</h3>
-	<ul>
-        <li><span class="ico feed"></span><a href="{%url create_dis%}" title="создать новую тему">Пост</a></li>
-		<li><span class="ico feed"></span><a href="{%url event_create%}" title="создать событие">Событие</a></li>
-		<li><span class="ico feed"></span><a href="{%url upload_file%}" title="добавить новый файл">Файл</a></li>
-    </ul>
-    <h3>Мои посты</h3>
+	<h3>Мои посты</h3>
     <ul>
     {%for d in user.discussion_set.all%}
-	   <li><a href="{%url dis_detail d.id%}">{{d}}({{d.comment_set.count}})</a></li>
+	   <li><span class="ico dis"></span><a href="{%url dis_detail d.id%}">{{d}}({{d.comment_set.count}})</a></li>
 	{%endfor%}
     </ul>
     <h3>Мои события</h3>
     <ul>
     {%for e in user.event_set.all%}
-	   <li><a href="{%url event_detail e.id%}">{{e}}({{e.commentevent_set.count}})</a></li>
+	   <li><span class="ico event"></span><a href="{%url event_detail e.id%}">{{e}}({{e.commentevent_set.count}})</a></li>
 	{%endfor%}
     </ul>
-    <h3>Нравится этот форум?</h3>
+    <h3>Добавить</h3>
 	<ul>
-        <li id="li_unsubscribe" style="display:none;"><span class="ico unsubscribe"></span><a href="#" onclick="objectSubscribe('forum',6241, 0); return false;" title="Нажмите, если вы не хотите получать уведомления">Отписаться</a></li>
-		<li id="li_subscribe"><span class="ico subscribe"></span><a href="#" onclick="objectSubscribe('forum',6241, 1); return false;" title="Нажмите, если вы хотите получать уведомления">Подписаться</a></li>
+        <li><span class="ico dis"></span><a href="{%url create_dis%}" title="создать новую тему">Пост</a></li>
+		<li><span class="ico event"></span><a href="{%url event_create%}" title="создать событие">Событие</a></li>
+		<li><span class="ico file_add"></span><a href="{%url upload_file%}" title="добавить новый файл">Файл</a></li>
     </ul>
+    
 </div>
 </div>
 

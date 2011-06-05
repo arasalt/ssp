@@ -3,25 +3,37 @@
 <div id= "content2">
     <h1><span>Детали События</span></h1>
 <div id="dis_mini">
-<h2>{{event|safe}}</h2>
+<h2 class="title">{{event|safe}}</h2>
+<div id="date_time">Дата начала:{{event.date}} в {{event.start_time}}</div>
 {{event.description|safe}}
-<p><b>Date:</b></p><p>{{event.date}}</p>
-<p><b>Time start:</b></p><p>{{event.start_time}}</p>
-<span class="spanpos">Приглашает на событие: <a href="{%url withoutedit event.author.id%}">{{event.author}}</a>  {{event.commentevent_set.count}} комментариев</span>
-<span class="edit_delete"><a href="{%url event_edit event.id %}">edit</a><a href="{%url event_delete event.id %}">delete</a></span>
+
+<span class="created spanpos">Приглашает на событие: <a href="{%url withoutedit event.author.id%}">{{event.author}}</a>  {{event.commentevent_set.count}} комментариев</span>
+{% ifequal user.id event.author.id %}
+    <div class="sup">
+    <ul>
+    <li class="left"><span class="ui-icon ui-icon-pencil"></span></li>
+    <li class="left"><a href="{%url event_edit event.id %}">ред.</a></li>
+    <li class="left"><span class="ui-icon ui-icon-close"></span></li>
+    <li class="left"><a href="{%url event_delete event.id %}">удалить</a></li>
+    </ul>
+    </div>
+{% endifequal %}
 </div>
 <h1>Комментарии</h1>
 {%for comment in event.commentevent_set.all%}
 <div class="comments">
 {% with comment.author.get_profile.image as image %}
 {% if image %}
-<img width="48" src="{{ image.url }}">
+<img src="{{ image.url }}">
 {% else %}
 <img src="/media/static/images/per.png">
 {% endif %}
 {% endwith %}
-<span>{{comment|safe}}</span>
-<p><a href="{%url withoutedit event.author.id%}">{{comment.author}}</a></p> 
+<div id="text">
+<a href="{%url withoutedit event.author.id%}">{{comment.author.client_set.get}}</a> 
+{{comment|safe}}
+<div id="date_mini">{{comment.created_date}}</div>
+</div>
 </div>
 {%empty%}
 No Comment
@@ -31,7 +43,6 @@ No Comment
 {{cform.as_p}}
 <input type='submit' value='post' />
 </form>
-
 </div>
 {%endif%}
 {%endblock%}

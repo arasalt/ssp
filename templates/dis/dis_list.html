@@ -11,12 +11,20 @@
         <img src="/media/static/images/per.png">
     {% endif %}
     {% endwith %}
-    <h2><a href="{%url dis_detail dis.id%}">{{dis}}</a></h2>
+    <h2 class="title"><a href="{%url dis_detail dis.id%}">{{dis}}</a></h2>
     <p>{{ dis.description|safe|truncatewords_html:20 }}</p>
-    <span class="spanpos">Created by:<a href="{%url withoutedit dis.author.id%}">{{dis.author}}</a>-{{dis.create_date}}-{{dis.comment_set.count}} comment</span>
-    <span class="edit_delete"><a href="{%url dis_edit dis.id %}">edit</a><a href="{%url dis_delete dis.id %}">delete</a></span>
+    <span class="created spanpos">Created by:<a href="{%url withoutedit dis.author.id%}">{{dis.author}}</a>-{{dis.create_date}}-{{dis.comment_set.count}} comment</span>
+    {% ifequal user.id dis.author.id %}
+    <div class="sup">
+    <ul>
+    <li class="left"><span class="ui-icon ui-icon-pencil"></span></li>
+    <li class="left"><a href="{%url dis_edit dis.id %}">ред.</a></li>
+    <li class="left"><span class="ui-icon ui-icon-close"></span></li>
+    <li class="left"><a href="{%url dis_delete dis.id %}">удалить</a></li>
+    </ul>
+    </div>
+    {% endifequal %}
     </div>
 {%endfor%}
-<a href="{%url create_dis%}">Create Discussion</a>
 </div>
 {%endblock%}

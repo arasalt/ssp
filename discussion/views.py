@@ -11,8 +11,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def home_profile(request):
-	diss=Discussion.objects.all().order_by('-create_date')[:5]
-	events=Event.objects.all().order_by('-date')[:5]		
+	diss=Discussion.objects.all().order_by('-create_date')[:10]
+	events=Event.objects.all().order_by('-date')[:10]		
 	rc=RequestContext(request,{'diss':diss,'events':events,})
 	return render_to_response("home_profile.html",rc)
 @login_required
